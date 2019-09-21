@@ -1,0 +1,2 @@
+# point-cloud-learn
+The aim is to approach machine learning techniques that extract models for predicting temporal point clouds. We will define a model for point clouds based on shapes, topology, and sampled properties and study different machine learning approaches to predict morphological changes. The final goal of this thesis is to be applicable to real problems, such as the prediction of rock falls. We expect the proposal to help aiding humans in identifying the characteristics of the geomorphological models.
