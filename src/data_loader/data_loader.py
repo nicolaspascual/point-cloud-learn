@@ -1,7 +1,7 @@
 import re
 import pandas as pd
 from io import StringIO
-from src.models import Cluster, RepresentativePoint
+from ..models import Cluster, RepresentativePoint
 
 def load_data(file_name):
     with open(file_name, 'r') as file:
