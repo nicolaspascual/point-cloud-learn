@@ -66,7 +66,7 @@ class Cluster(object):
                 tab_string_rep += f'{self.values[current_value]},'
                 current_value += 1
             else:
-                tab_string_rep += f'None ,'
+                tab_string_rep += f'None,'
         return tab_string_rep
 
     def to_series(self):
