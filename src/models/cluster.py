@@ -15,7 +15,14 @@ class Cluster(object):
         'intensity_sigma_origin', 'texture_code_destination', 'red_mean_destination',
         'red_sigma_destination', 'green_mean_destination', 'green_sigma_destination',
         'blue_mean_destination', 'blue_sigma_destination', 'intensity_mean_destination',
-        'intensity_sigma_destination', 'file_origin', 'file_destination'
+        'intensity_sigma_destination', 'correlation_index', 'orientation_mean_origin',
+        'slope_mean_origin', 'orientation_mean_destination', 'slope_mean_destination',
+        'coplanararity_index_mean_origin', 'coplanararity_index_sigma_origin',
+        'colinearity_index_mean_origin', 'colinearity_index_sigma_origin',
+        'coplanararity_index_mean_destination', 'coplanararity_index_sigma_destination',
+        'colinearity_index_mean_destination', 'colinearity_index_sigma_destination',
+        'angles_mean', 'angles_sigma', 
+        'file_origin', 'file_destination'
     ]
 
     @classmethod
@@ -27,14 +34,15 @@ class Cluster(object):
         self.feature_names = Cluster.feature_names[:]
         self.values = args
         self._remove_invalid_texture_cols()
+        assert(len(self.values) == len(self.feature_names))
     
     def _remove_invalid_texture_cols(self):
         self.remove_invalid_texture_cols('origin', self.values[22])
         destination_index = 31
-        if self.values[23] == 0: destination_index -= 8
-        elif self.values[23] == 1: destination_index -= 6
-        elif self.values[23] == 2: destination_index -= 2
-        self.remove_invalid_texture_cols('destination', destination_index)
+        if self.values[22] == '0': destination_index -= 8
+        elif self.values[22] == '1': destination_index -= 6
+        elif self.values[22] == '2': destination_index -= 2
+        self.remove_invalid_texture_cols('destination', self.values[destination_index])
 
     def remove_invalid_texture_cols(self, suffix, index):
         to_remove = []
@@ -58,7 +66,7 @@ class Cluster(object):
                 tab_string_rep += f'{self.values[current_value]},'
                 current_value += 1
             else:
-                tab_string_rep += f'None,'
+                tab_string_rep += f'None ,'
         return tab_string_rep
 
     def to_series(self):
