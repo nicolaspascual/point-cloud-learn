@@ -15,6 +15,7 @@ jupyter = "*"
 sklearn = "*"
 ipympl = "*"
 pydotplus = "*"
+imblearn = "*"
 
 [requires]
 python_version = "3.7"
