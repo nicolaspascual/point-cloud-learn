@@ -16,6 +16,7 @@ sklearn = "*"
 ipympl = "*"
 pydotplus = "*"
 imblearn = "*"
+smote-variants = "*"
 
 [requires]
 python_version = "3.7"
