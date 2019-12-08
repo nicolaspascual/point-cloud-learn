@@ -17,6 +17,7 @@ ipympl = "*"
 pydotplus = "*"
 imblearn = "*"
 smote-variants = "*"
+xgboost = "*"
 
 [requires]
 python_version = "3.7"
