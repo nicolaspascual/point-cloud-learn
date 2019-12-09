@@ -31,7 +31,6 @@ def model_selector(model, options, X_path='../data/all_X.csv', y_path='../data/a
             ('OVERSAMPLER', oversampler), (model_name, model())
         ])
 
-
         clf = GridSearchCV(
             pipeline, options, scoring=imbalanced_score(recall_rate=recall_rate),
             n_jobs=3, verbose=10, return_train_score=True
@@ -40,9 +39,9 @@ def model_selector(model, options, X_path='../data/all_X.csv', y_path='../data/a
         clf.fit(X_train, y_train)
         
         y_pred = clf.predict(X_test)
-        with open(f'results/{model_name}-{oversampler.__class__.__name__}.pickle', 'wb') as f:
+        with open(f'model-results/{model_name}-{oversampler.__class__.__name__}.pickle', 'wb') as f:
             pickle.dump(clf.best_params_, f)
-        with open(f'results/{model_name}-{oversampler.__class__.__name__}-results.pickle', 'wb') as f:
+        with open(f'model-results/{model_name}-{oversampler.__class__.__name__}-results.pickle', 'wb') as f:
             pickle.dump((clf.cv_results_, y_test, y_pred), f)   
 
         print(f'{model_name}-{oversampler.__class__.__name__}')
