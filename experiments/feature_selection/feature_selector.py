@@ -7,7 +7,7 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
-from sklearn.feature_selection import RFE
+from sklearn.feature_selection import SelectKBest, mutual_info_classif
 
 from xgboost import XGBClassifier
 
@@ -23,7 +23,7 @@ def feature_selector(model, oversampler, X_path='../data/all_X.csv', y_path='../
     y = pd.read_csv(y_path, header=None).T.ix[0]
 
     options = {
-        'FEATURE_SELECTION__n_features_to_select': list(range(5, len(X.columns)))
+        'FEATURE_SELECTION__k': list(range(5, len(X.columns)))
     }
 
     i_train, i_test = next(StratifiedShuffleSplit(test_size=0.2, random_state=40).split(X, y))
@@ -33,7 +33,7 @@ def feature_selector(model, oversampler, X_path='../data/all_X.csv', y_path='../
     model_name = model.__class__.__name__.split('.')[-1]
     pipeline = Pipeline([
         ('OVERSAMPLER', oversampler),
-        ('FEATURE_SELECTION', RFE(XGBClassifier())),
+        ('FEATURE_SELECTION', SelectKBest(mutual_info_classif)),
         (model_name, model)
     ])
 

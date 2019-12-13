@@ -1,1 +1,1 @@
-from .evaluation import imbalanced_score, matthews_corrcoef_score
+from .evaluation import imbalanced_score, matthews_corrcoef_score, nemenyi_critical_values
