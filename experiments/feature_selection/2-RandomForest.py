@@ -10,7 +10,7 @@ np.random.seed(0)
 
 base_name = './model_selection/results/RandomForestClassifier-'
 for ov in [G_SMOTEDecorator(), ADASYN()]:
-    conf = extract_configuration(base_name + ov.__class__.__name__  +'.pickle')
+    conf = extract_configuration(base_name + ov.__class__.__name__ + '.pickle')
     feature_selector(
         RandomForestClassifier(**conf),
         ov

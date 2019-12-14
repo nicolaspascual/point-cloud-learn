@@ -21,7 +21,7 @@ class Cluster(object):
         'colinearity_index_mean_origin', 'colinearity_index_sigma_origin',
         'coplanararity_index_mean_destination', 'coplanararity_index_sigma_destination',
         'colinearity_index_mean_destination', 'colinearity_index_sigma_destination',
-        'angles_mean', 'angles_sigma', 
+        'angles_mean', 'angles_sigma',
         'file_origin', 'file_destination'
     ]
 
@@ -35,14 +35,18 @@ class Cluster(object):
         self.values = args
         self._remove_invalid_texture_cols()
         assert(len(self.values) == len(self.feature_names))
-    
+
     def _remove_invalid_texture_cols(self):
         self.remove_invalid_texture_cols('origin', self.values[22])
         destination_index = 31
-        if self.values[22] == '0': destination_index -= 8
-        elif self.values[22] == '1': destination_index -= 6
-        elif self.values[22] == '2': destination_index -= 2
-        self.remove_invalid_texture_cols('destination', self.values[destination_index])
+        if self.values[22] == '0':
+            destination_index -= 8
+        elif self.values[22] == '1':
+            destination_index -= 6
+        elif self.values[22] == '2':
+            destination_index -= 2
+        self.remove_invalid_texture_cols(
+            'destination', self.values[destination_index])
 
     def remove_invalid_texture_cols(self, suffix, index):
         to_remove = []
