@@ -1,5 +1,5 @@
 from imblearn.over_sampling import ADASYN
-from src.oversampling import G_SMOTEDecorator
+from src.oversampling import SMOTETomekLinksDecorator, ClusterCentroids
 from src.evaluation import imbalanced_score, matthews_corrcoef_score
 from imblearn.pipeline import Pipeline
 from xgboost import XGBClassifier

@@ -1,5 +1,7 @@
+import sys
+sys.path.append('../')
 from imblearn.over_sampling import ADASYN
-from src.oversampling import G_SMOTEDecorator
+from src.oversampling import SMOTETomekLinksDecorator, ClusterCentroids
 from src.evaluation import imbalanced_score, matthews_corrcoef_score
 from imblearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
@@ -8,8 +10,7 @@ from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.metrics import classification_report
 import pandas as pd
 import pickle
-import sys
-sys.path.append('../')
+
 
 
 def model_selector(model, options, X_path='../data/all_X.csv', y_path='../data/all_y.csv', recall_rate=0.7):
@@ -23,7 +24,7 @@ def model_selector(model, options, X_path='../data/all_X.csv', y_path='../data/a
 
     model_name = model.__name__.split('.')[-1]
 
-    for oversampler in [G_SMOTEDecorator(), ADASYN()]:
+    for oversampler in [ClusterCentroids(), SMOTETomekLinksDecorator()]:
 
         pipeline = Pipeline([
             ('OVERSAMPLER', oversampler), (model_name, model())
